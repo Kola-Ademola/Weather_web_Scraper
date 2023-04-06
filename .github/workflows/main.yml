@@ -30,3 +30,6 @@ jobs:
     
     - name: Run notebook
       run: jupyter nbconvert --execute --to notebook --inplace Weather_web_scraper.ipynb
+    
+    - name: Run post-commit hook
+      run: git commit --amend --no-edit && git push origin HEAD:main
