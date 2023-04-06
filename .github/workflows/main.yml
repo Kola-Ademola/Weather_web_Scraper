@@ -32,8 +32,11 @@ jobs:
       run: jupyter nbconvert --execute --to notebook --inplace Weather_web_scraper.ipynb
     
     - name: Run post-commit hook
-      run: git commit --amend --no-edit && git push origin HEAD:main
-      
+      run: |
+        git add .
+        git commit -m "Auto commit" || true
+        git push origin HEAD:main
+        
     - name: Set Git identity
       run: |
         git config user.email "Kolaademola1561@yahoo.com"
