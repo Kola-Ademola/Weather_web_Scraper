@@ -33,3 +33,9 @@ jobs:
     
     - name: Run post-commit hook
       run: git commit --amend --no-edit && git push origin HEAD:main
+      
+    - name: Set Git identity
+      run: |
+        git config user.email "Kolaademola1561@yahoo.com"
+        git config user.name "Kola Ademola"
+
