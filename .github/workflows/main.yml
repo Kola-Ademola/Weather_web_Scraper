@@ -1,6 +1,7 @@
 name: Weather Scraping Workflow
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '*/5 * * * *' #'0 12 * * *' # run every day at 12pm UTC
 
