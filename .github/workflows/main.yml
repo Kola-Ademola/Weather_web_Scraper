@@ -1,0 +1,45 @@
+name: Weather Scraping Workflow
+
+on:
+  schedule:
+    - cron: '*/2 * * * *' #'0 12 * * *' # run every day at 12pm UTC
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Set up Node.js 16
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+        
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+        
+    - name: Install requirements
+      run: pip install -r requirements.txt
+    
+    - name: Install Jupyter
+      run: pip install jupyter  
+    
+    - name: Run notebook
+      run: jupyter nbconvert --execute --to notebook --inplace Weather_web_scraper.ipynb
+
+    - name: Set Git identity
+      run: |
+        git config user.email "Kolaademola1561@yahoo.com"
+        git config user.name "Kola Ademola"
+        
+    - name: Run post-commit hook
+      run: |
+        git add .
+        git commit -m "Auto commit" || true
+        git push origin HEAD:main
+        
+
